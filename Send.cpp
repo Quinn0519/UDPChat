@@ -19,22 +19,22 @@ int main()
 	addr.sin_addr.S_un.S_addr = inet_addr("127.0.0.1"); // TODO：域名解析 + IP 端口可设定
 	addr.sin_port = htons(8080);
 
-   
 	while (true)
 	{
-		// TODO：发送时间
-		// clock_t start, end;
-		// 	start = clock();
-		// 	end = clock(); 
-		
+		// 发送时间
+		time_t now = time(NULL);
+		char *date = ctime(&now);
+
 		// 从这里开始
 		string str;
 		char *buf = "\0";
-		cout << "请输入：";
+
+		cout << "┌┅ Send To: " << inet_ntoa(addr.sin_addr) << ":" << ntohs(addr.sin_port) << " ┅ "
+			 << date << "└┅ ";
 		getline(cin, str);
 		buf = &str[0]; //******
-		cout << buf << endl;
-		// cout << "time = " << double(end - start) / CLOCKS_PER_SEC << "s" << endl;
+		cout << endl;
+
 		int bufSize = strlen(buf);
 		// 到这里结束 重点学一学
 

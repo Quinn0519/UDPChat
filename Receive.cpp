@@ -25,7 +25,7 @@ int main()
 		exit(0);
 	}
 
-	cout << "udp服务启动，正确8080端口监听" << endl;
+	// cout << "udp服务启动，正确8080端口监听" << endl;
 
 	// 来者是谁
 	sockaddr_in fromAddr;
@@ -46,15 +46,20 @@ int main()
 		  失败返回-1
 		*/
 		int recvRet = recvfrom(server, buf, sizeof(buf), 0, (sockaddr *)&fromAddr, &fromAddrLen);
-
 		if (recvRet == -1)
 		{
 			cout << "接收失败:请重新输入" << errno << endl;
 			break;
 		}
 
+		// 接收时间
+		time_t now = time(NULL);
+		char *date = ctime(&now);
+
 		// IP端口号表示:127.0.0.1:8080
-		cout << inet_ntoa(addr.sin_addr) << ":" << ntohs(addr.sin_port) << "收到:" << buf << endl;
+		cout << "┌┅ Receive from: " << inet_ntoa(addr.sin_addr) << ":" << ntohs(addr.sin_port) << " ┅ "
+			 << date << "└┅ " << buf << endl
+			 << endl;
 	}
 
 	cout << "服务运行结束:" << errno << endl;
