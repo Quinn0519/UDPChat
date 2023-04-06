@@ -29,26 +29,13 @@ int main()
 		exit(0);
 	}
 
-	// cout << "udp服务启动，正确8080端口监听" << endl;
-
 	// 来者是谁
 	sockaddr_in fromAddr;
 	int fromAddrLen = sizeof(fromAddr);
 
 	while (true)
 	{
-		// TODO：接收时间
 		char buf[1024] = {0};
-		/*
-		  int fd             : 套接字描述符
-		  char* buf          : 缓冲区
-		  int bufSize        : 缓冲区大小
-		  int flags          : 给0就可以了
-		  sockaddr* addr     : 用来保存接收到的地址
-		  int* addrLen       : 用来保存前一个参数的长度
-		  成功返回实际接收的字节数
-		  失败返回-1
-		*/
 		int recvRet = recvfrom(server, buf, sizeof(buf), 0, (sockaddr *)&fromAddr, &fromAddrLen); // TODO：解决0.0.0.0
 		if (recvRet == -1)
 		{
