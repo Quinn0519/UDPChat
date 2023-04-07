@@ -135,9 +135,9 @@ int main()
 		// 输入要发送的数据
 		string str;
 		char *buf = "\0";
-		int bufSize = strlen(buf);
 		getline(cin, str); // getline()方法是解决cin不能输入含空格的问题
 		buf = &str[0];	   // 将字符串类型的变量 str 所代表的字符串的首地址赋给变量buf
+		int bufSize = strlen(buf);
 
 		// 此代码使用 UDP 协议将大小缓冲区中包含的消息发送到指定的远程主机。远程主机由其 IP 地址和端口号标识，这些地址和端口号存储在 指向的结构中。
 		int sendRet = sendto(client, buf, bufSize, 0, (sockaddr *)&addr, sizeof(addr));
@@ -151,6 +151,8 @@ int main()
 			WSACleanup();
 			return 1;
 		}
+
+		cout << endl;
 	}
 
 	closesocket(client);
